@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass   # 루트 비밀번호
+      MYSQL_DATABASE: ktb_week4          # 기본 생성 DB
+      MYSQL_USER: admin               # 사용자
+      MYSQL_PASSWORD: 1234            # 사용자 비밀번호
+    volumes:
+      - "./mysql-data:/var/lib/mysql"
+    ports:
+      - "3306:3306"

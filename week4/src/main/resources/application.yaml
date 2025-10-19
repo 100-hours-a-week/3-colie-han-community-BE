@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    #url: jdbc:mysql://localhost:3306/ktb_week4?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    #username: admin
+    #password: 1234
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+   url: jdbc:h2:tcp://localhost/~/test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;NON_KEYWORDS=VALUE
+   username: sa
+   password:
+   driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+jwt:
+  secret: L0YkzVg3p4fPzUsj2xJ8pK2E0mSYF5OdpQ0CVbJv9A6q6QYvO2tS8T8fD3yP8oYt
