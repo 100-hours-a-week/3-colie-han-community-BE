@@ -1,0 +1,10 @@
+<th:block th:fragment="legalHead(title, canonical, lang)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${title}">Legal</title>
+    <link rel="canonical" th:href="${canonical}" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" th:content="${title}" />
+    <meta http-equiv="content-language" th:content="${lang}" />
+</th:block>
