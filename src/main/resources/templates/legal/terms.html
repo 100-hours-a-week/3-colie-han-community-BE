@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{_fragments/legal_head :: legalHead(title=${title}, canonical=${canonical}, lang=${lang})}">
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/legal.css" />
+</head>
+
+<body>
+<main class="main">
+    <div class="legal-container">
+        <h1 th:text="${title}">이용약관</h1>
+        <p>
+            <small>
+                버전: <span th:text="${version}">1.0.0</span> · 개정일:
+                <span th:text="${lastUpdated}">2025-10-25</span>
+            </small>
+        </p>
+
+        <section class="legal-content" th:utext="${body}">
+            <!-- Markdown 변환된 HTML 본문 -->
+        </section>
+    </div>
+</main>
+</body>
+</html>

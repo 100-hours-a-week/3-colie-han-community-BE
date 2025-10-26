@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{_fragments/legal_head :: legalHead(title=${title}, canonical=${canonical}, lang=${lang})}">
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/legal.css" />
+</head>
+
+<body>
+<main>
+    <h1 th:text="${title}">개인정보처리방침</h1>
+    <p>
+        <small>
+            버전: <span th:text="${version}"></span> · 개정일: <span th:text="${lastUpdated}"></span>
+        </small>
+    </p>
+
+    <section>
+        <section th:utext="${body}"></section>
+    </section>
+</main>
+</body>
+</html>

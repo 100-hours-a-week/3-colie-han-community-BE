@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="645e1497-20a0-4a23-966a-78737c8701d9" name="Changes" comment="feat : 커뮤니티 이용약관, 개인정보처리방침 추가" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="week4" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="week4" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="week4" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="week4" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;EunSeo0117&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/100-hours-a-week/3-colie-han-community-BE.git",
+    "accountId": "50d29a11-57ae-476e-b110-88c27060a34a"
+  }
+}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="33MIYaPtXavmpBbF8MdfV72ZkwT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build week4.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.changePassword.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.createUser.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.UserServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.week4 [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.week4 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.week4 [compileJava].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/_fragments" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/assets" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/js" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/css" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ktb.week4.util" />
+      <recent name="ktb.week4.user" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="UserServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ktb.week4.UserServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceTest.changePassword" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ktb.week4.UserServiceTest.changePassword&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceTest.createUser" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ktb.week4.UserServiceTest.createUser&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="week4 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="week4 [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="week4.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ktb.week4.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.UserServiceTest" />
+        <item itemvalue="Gradle.UserServiceTest.changePassword" />
+        <item itemvalue="Gradle.UserServiceTest.createUser" />
+        <item itemvalue="Gradle.week4 [build]" />
+        <item itemvalue="Gradle.week4 [compileJava]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="645e1497-20a0-4a23-966a-78737c8701d9" name="Changes" comment="" />
+      <created>1759120562927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759120562927</updated>
+      <workItem from="1759120564684" duration="178000" />
+      <workItem from="1759133632664" duration="1647000" />
+      <workItem from="1759144698888" duration="11000" />
+      <workItem from="1759285376082" duration="761000" />
+      <workItem from="1759306072721" duration="88000" />
+      <workItem from="1759306407550" duration="139000" />
+      <workItem from="1759317142320" duration="5259000" />
+      <workItem from="1759381247142" duration="1373000" />
+      <workItem from="1759390665079" duration="1297000" />
+      <workItem from="1759647024588" duration="3214000" />
+      <workItem from="1759654026497" duration="15679000" />
+      <workItem from="1760101897288" duration="494000" />
+      <workItem from="1760169745489" duration="21169000" />
+      <workItem from="1760248687554" duration="2118000" />
+      <workItem from="1760251716895" duration="4261000" />
+      <workItem from="1760261653689" duration="6953000" />
+      <workItem from="1760275085318" duration="1000" />
+      <workItem from="1760275881155" duration="86000" />
+      <workItem from="1760275969986" duration="10375000" />
+      <workItem from="1760291568203" duration="97000" />
+      <workItem from="1760405232783" duration="71000" />
+      <workItem from="1760405317615" duration="282000" />
+      <workItem from="1760415102111" duration="43000" />
+      <workItem from="1760417012009" duration="14465000" />
+      <workItem from="1760458232046" duration="625000" />
+      <workItem from="1760488636775" duration="9547000" />
+      <workItem from="1760512898396" duration="1647000" />
+      <workItem from="1760549777592" duration="3594000" />
+      <workItem from="1760558122387" duration="578000" />
+      <workItem from="1760558736855" duration="123000" />
+      <workItem from="1760558876553" duration="302000" />
+      <workItem from="1760559224020" duration="2686000" />
+      <workItem from="1760574720164" duration="932000" />
+      <workItem from="1760577830678" duration="16000" />
+      <workItem from="1760577987175" duration="5630000" />
+      <workItem from="1760612503459" duration="1309000" />
+      <workItem from="1760699564107" duration="4599000" />
+      <workItem from="1760729357316" duration="1088000" />
+      <workItem from="1760779813311" duration="36185000" />
+      <workItem from="1760882416426" duration="184000" />
+      <workItem from="1760882639619" duration="439000" />
+      <workItem from="1760883167189" duration="40000" />
+      <workItem from="1760883234257" duration="608000" />
+      <workItem from="1760883929540" duration="20000" />
+      <workItem from="1760883960997" duration="19000" />
+      <workItem from="1760884003693" duration="16000" />
+      <workItem from="1760884026897" duration="177000" />
+      <workItem from="1760884281404" duration="76000" />
+      <workItem from="1760884371802" duration="20000" />
+      <workItem from="1760884478033" duration="16000" />
+      <workItem from="1760884504081" duration="17000" />
+      <workItem from="1760884538207" duration="19000" />
+      <workItem from="1760884675260" duration="10000" />
+      <workItem from="1760884701112" duration="2565000" />
+      <workItem from="1760887343975" duration="3769000" />
+      <workItem from="1760891614730" duration="460000" />
+      <workItem from="1760922013007" duration="30000" />
+      <workItem from="1760922548817" duration="8000" />
+      <workItem from="1760922886311" duration="11000" />
+      <workItem from="1760923123794" duration="13000" />
+      <workItem from="1760923737950" duration="24000" />
+      <workItem from="1760925168596" duration="29000" />
+      <workItem from="1760926483535" duration="26000" />
+      <workItem from="1760954303678" duration="114000" />
+      <workItem from="1760954467428" duration="29000" />
+      <workItem from="1760954561497" duration="22000" />
+      <workItem from="1760954636762" duration="65000" />
+      <workItem from="1760954736259" duration="17000" />
+      <workItem from="1760954773308" duration="9000" />
+      <workItem from="1760954812612" duration="7000" />
+      <workItem from="1761004521969" duration="34000" />
+      <workItem from="1761009952554" duration="1221000" />
+      <workItem from="1761012536264" duration="10001000" />
+      <workItem from="1761032321334" duration="2655000" />
+      <workItem from="1761037965613" duration="2281000" />
+      <workItem from="1761044535968" duration="690000" />
+      <workItem from="1761093202555" duration="154000" />
+      <workItem from="1761093359398" duration="5000" />
+      <workItem from="1761093378507" duration="18194000" />
+      <workItem from="1761116650866" duration="190000" />
+      <workItem from="1761116933056" duration="481000" />
+      <workItem from="1761117548349" duration="1659000" />
+      <workItem from="1761119404299" duration="2031000" />
+      <workItem from="1761122311090" duration="47000" />
+      <workItem from="1761122373543" duration="133000" />
+      <workItem from="1761122545475" duration="411000" />
+      <workItem from="1761215435688" duration="39000" />
+      <workItem from="1761374001776" duration="806000" />
+      <workItem from="1761374846828" duration="5650000" />
+      <workItem from="1761400814933" duration="2915000" />
+      <workItem from="1761483498559" duration="5546000" />
+      <workItem from="1761490628113" duration="8008000" />
+      <workItem from="1761521545173" duration="12000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <option name="closed" value="true" />
+      <created>1760274204333</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1760274204333</updated>
+    </task>
+    <task id="LOCAL-00002" summary="init">
+      <option name="closed" value="true" />
+      <created>1760276111741</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1760276111741</updated>
+    </task>
+    <task id="LOCAL-00003" summary="remove : 과제1~4코드 삭제">
+      <option name="closed" value="true" />
+      <created>1760285949392</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760285949392</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix : userId조회기능 수정">
+      <option name="closed" value="true" />
+      <created>1760285962786</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760285962786</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix : base entity 상속 엔티티에 컬럼으로 포함">
+      <option name="closed" value="true" />
+      <created>1760291248241</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760291248241</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix : pathvariable에 userId 추가">
+      <option name="closed" value="true" />
+      <created>1760291275054</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760291275054</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix : pathvariable에 userId 추가">
+      <option name="closed" value="true" />
+      <created>1760291294783</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760291294783</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix : pathvariable에 userId 추가">
+      <option name="closed" value="true" />
+      <created>1760291319401</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1760291319401</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix : 복합키 생성자 추가">
+      <option name="closed" value="true" />
+      <created>1760291331671</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760291331671</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix : 트랜잭션추가">
+      <option name="closed" value="true" />
+      <created>1760291340214</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760291340214</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat : 로그인 기능 구현">
+      <option name="closed" value="true" />
+      <created>1760561602732</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760561602732</updated>
+    </task>
+    <task id="LOCAL-00012" summary="chore : 환경변수 추가">
+      <option name="closed" value="true" />
+      <created>1760561789797</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1760561789797</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix : currentUser 어노테이션 추가">
+      <option name="closed" value="true" />
+      <created>1760575328617</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1760575328617</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix : DTO id반환추가">
+      <option name="closed" value="true" />
+      <created>1760579214771</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1760579214771</updated>
+    </task>
+    <task id="LOCAL-00015" summary="rename : 파일위치변경">
+      <option name="closed" value="true" />
+      <created>1760780225588</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1760780225588</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix : 사용자검증 수정">
+      <option name="closed" value="true" />
+      <created>1760880719711</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1760880719711</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix : 권한에러 수정">
+      <option name="closed" value="true" />
+      <created>1760880737387</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1760880737387</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix : 조회id수정">
+      <option name="closed" value="true" />
+      <created>1760891020050</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1760891020050</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat : 쿠키추가">
+      <option name="closed" value="true" />
+      <created>1760891041885</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1760891041885</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat : fe추가">
+      <option name="closed" value="true" />
+      <created>1760891653586</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1760891653586</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat : 전역 예외처리, 공통응답 추가">
+      <option name="closed" value="true" />
+      <created>1761215466059</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1761215466059</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix : 좋아요기능 수정">
+      <option name="closed" value="true" />
+      <created>1761403499338</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1761403499338</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat : 커뮤니티 이용약관, 개인정보처리방침 추가">
+      <option name="closed" value="true" />
+      <created>1761483590079</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1761483590079</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="init" />
+    <MESSAGE value="remove : 과제1~4코드 삭제" />
+    <MESSAGE value="fix : userId조회기능 수정" />
+    <MESSAGE value="fix : base entity 상속 엔티티에 컬럼으로 포함" />
+    <MESSAGE value="fix : pathvariable에 userId 추가" />
+    <MESSAGE value="fix : 복합키 생성자 추가" />
+    <MESSAGE value="fix : 트랜잭션추가" />
+    <MESSAGE value="feat : 로그인 기능 구현" />
+    <MESSAGE value="chore : 환경변수 추가" />
+    <MESSAGE value="fix : currentUser 어노테이션 추가" />
+    <MESSAGE value="fix : DTO id반환추가" />
+    <MESSAGE value="rename : 파일위치변경" />
+    <MESSAGE value="fix : 사용자검증 수정" />
+    <MESSAGE value="fix : 권한에러 수정" />
+    <MESSAGE value="fix : 조회id수정" />
+    <MESSAGE value="feat : 쿠키추가" />
+    <MESSAGE value="feat : fe추가" />
+    <MESSAGE value="feat : 전역 예외처리, 공통응답 추가" />
+    <MESSAGE value="fix : 좋아요기능 수정" />
+    <MESSAGE value="feat : 커뮤니티 이용약관, 개인정보처리방침 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : 커뮤니티 이용약관, 개인정보처리방침 추가" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
