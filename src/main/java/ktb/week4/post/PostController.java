@@ -24,7 +24,6 @@ public class PostController {
 
     private final PostService postService;
     private final PostImageService postImageService;
-    private final PostViewService postViewService;
 
     @GetMapping
     public ResponseEntity<Page<PostOverviewResponse>> getAllPosts(@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -43,7 +42,6 @@ public class PostController {
     public ResponseEntity<Long> uploadPost(@Valid @ModelAttribute PostRequest request,
                                            @CurrentUser User user) {
 
-        // todo 게시물 생성 service 호출 -> 내부에서 post생성, image생성
         Long postId = postService.uploadPost(request, user);
         return ResponseEntity.ok(postId);
     }
@@ -53,10 +51,7 @@ public class PostController {
                                         @Valid @ModelAttribute PostRequest request,
                                         @CurrentUser User user) {
 
-        Long response = postService.updatePost(postId, request.postTitle(), request.postContent(), user);
-        if (request.files() != null &&  !request.files().isEmpty()) {
-            postImageService.updatePostImages(postId, request.files());
-        }
+        Long response = postService.updatePost(postId, request, user);
 
         return ResponseEntity.ok(response);
     }

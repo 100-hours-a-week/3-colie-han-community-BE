@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserPostLikeController {
     private final UserPostLikeService userPostLikeService;
-    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<?> addLike(@PathVariable Long postId,
