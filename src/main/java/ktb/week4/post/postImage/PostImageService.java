@@ -5,6 +5,8 @@ import ktb.week4.image.ImageService;
 import ktb.week4.post.Post;
 import ktb.week4.post.PostRepository;
 import ktb.week4.post.PostService;
+import ktb.week4.util.exception.CustomException;
+import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,7 @@ public class PostImageService {
     @Transactional
     public void createPostImages(Long postId, List<MultipartFile> postImages) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(()-> new IllegalArgumentException("Post not found"));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         int idx = 1;
         for (MultipartFile postImage : postImages) {

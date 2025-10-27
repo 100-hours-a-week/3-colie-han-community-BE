@@ -6,6 +6,8 @@ import ktb.week4.post.PostService;
 import ktb.week4.post.postView.PostViewService;
 import ktb.week4.user.User;
 import ktb.week4.user.UserService;
+import ktb.week4.util.exception.CustomException;
+import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +42,7 @@ public class UserPostLikeService {
 
     private void validateOwner(User user, User postUser) {
         if (user.getId().equals(postUser.getId())) {
-            throw new IllegalArgumentException("post owner can't like own posts");
+            throw new CustomException(ErrorCode.NOT_RESOURCE_OWNER);
         }
     }
 
@@ -54,6 +56,6 @@ public class UserPostLikeService {
 
     private Post getPostById(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(()-> new IllegalArgumentException("post not found"));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
     }
 }

@@ -2,6 +2,8 @@ package ktb.week4.user;
 
 import ktb.week4.image.Image;
 import ktb.week4.image.ImageService;
+import ktb.week4.util.exception.CustomException;
+import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,7 +56,7 @@ public class UserService {
         user.updateNickName(request.nickName());
         userRepository.save(user);
 
-        log.info("nickname updated");
+        log.info("닉네임 변경 완료.");
     }
 
     @Transactional
@@ -64,7 +66,7 @@ public class UserService {
         user.updatePassword(passwordEncoder.encode(request.password()));
         userRepository.save(user);
 
-        log.info("password updated");
+        log.info("비밀번호 변경 완료.");
     }
 
     @Transactional
@@ -75,19 +77,19 @@ public class UserService {
 
     private void validateEmail(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException("email is exist");
+            throw new CustomException(ErrorCode.EMAIL_ALREADY_EXISTS);
         }
     }
 
     private void validateNickname(String nickname) {
         if (userRepository.existsByNickName(nickname)) {
-            throw new IllegalArgumentException("nickname is exist");
+            throw new CustomException(ErrorCode.NICKNAME_ALREADY_EXISTS);
         }
     }
 
     private void validatePassword(String password, String confirmPassword) {
         if (!password.equals(confirmPassword)) {
-            throw new IllegalArgumentException("passwords do not match");
+            throw new CustomException(ErrorCode.PASSWORD_MISMATCH);
         }
     }
 

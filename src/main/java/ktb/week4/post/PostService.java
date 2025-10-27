@@ -13,6 +13,8 @@ import ktb.week4.post.postView.PostViewService;
 import ktb.week4.user.User;
 import ktb.week4.image.ImageRepository;
 import ktb.week4.user.UserService;
+import ktb.week4.util.exception.CustomException;
+import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -67,7 +69,7 @@ public class PostService {
     public PostDetailResponse getPost(Long postId) {
         Post post = getPostById(postId);
         PostView postView = postViewRepository.findById(postId)
-                .orElseThrow(()-> new IllegalArgumentException("Post not found"));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         List<PostImage> postImages = postImageRepository.findAllById_PostId(postId);
         List<PostImageResponse> postImagesResponses = new ArrayList<>();
@@ -101,16 +103,22 @@ public class PostService {
     }
 
     @Transactional
-    public Long updatePost(Long postId, String title, String content, User user) {
+    public Long updatePost(Long postId, PostRequest request, User user) {
         Post post = getPostById(postId);
         validateUser(post, user);
 
-        if (title != null) {
-            post.updatePostTitle(title);
+        // 이미지 수정
+        if (request.files() != null &&  !request.files().isEmpty()) {
+            postImageService.updatePostImages(postId, request.files());
         }
 
-        if (content != null) {
-            post.updatePostContent(content);
+        // 제목 본문 수정
+        if (request.postTitle() != null) {
+            post.updatePostTitle(request.postTitle());
+        }
+
+        if (request.postContent() != null) {
+            post.updatePostContent(request.postContent());
         }
 
         postRepository.save(post);
@@ -145,12 +153,12 @@ public class PostService {
 
     private Post getPostById(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("Post id " + postId + " not found"));
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
     }
 
     private void validateUser(Post post, User user) {
         if (!post.getUser().getId().equals(user.getId())) {
-            throw new IllegalArgumentException("forbidden user");
+            throw new CustomException(ErrorCode.NOT_RESOURCE_OWNER);
         }
     }
 

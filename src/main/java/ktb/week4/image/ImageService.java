@@ -1,6 +1,9 @@
 package ktb.week4.image;
 
+import ktb.week4.util.exception.CustomException;
+import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ImageService {
@@ -61,20 +65,21 @@ public class ImageService {
 
     private void validateFileNotEmpty(MultipartFile file) {
         if (file == null || file.isEmpty()) {
-            throw new IllegalArgumentException("file is empty");
+            throw new CustomException(ErrorCode.FILE_EMPTY);
         }
     }
 
     private void validateContentType(MultipartFile file) {
         String contentType = file.getContentType();
         if (contentType == null || !ALLOWED_CONTENT_TYPES.contains(contentType.toLowerCase(Locale.ROOT))) {
-            throw new IllegalArgumentException(String.format("invalid content type: %s", contentType));
+            log.error("Invalid content type: {}", contentType);
+            throw new CustomException(ErrorCode.INVALID_FILE_TYPE);
         }
     }
 
     private void validateSize(MultipartFile file) {
         if (file.getSize() > DEFAULT_MAX_FILE_SIZE) {
-            throw new IllegalArgumentException("file size too large");
+            throw new CustomException(ErrorCode.FILE_SIZE_EXCEEDED);
         }
 
     }
@@ -98,7 +103,8 @@ public class ImageService {
         try {
             Path destination = rootLocation.resolve(storedName).normalize().toAbsolutePath();
             if (!destination.startsWith(rootLocation)) {
-                throw new IllegalArgumentException(String.format("stored name '%s' is invalid", storedName));
+                log.error("Invalid file path: {}", storedName);
+                throw new CustomException(ErrorCode.INVALID_FILE_PATH);
             }
             return destination;
         } catch (Exception e) {

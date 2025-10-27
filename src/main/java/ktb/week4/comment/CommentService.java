@@ -8,6 +8,8 @@ import ktb.week4.post.postView.PostViewService;
 import ktb.week4.user.User;
 import ktb.week4.post.PostService;
 import ktb.week4.user.UserService;
+import ktb.week4.util.exception.CustomException;
+import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,18 +54,18 @@ public class CommentService {
         Comment comment = getCommentById(commentId);
 
         if (!comment.getUser().getId().equals(user.getId())) {
-            throw new IllegalArgumentException("not allowed to update comment");
+            throw new CustomException(ErrorCode.NOT_RESOURCE_OWNER);
         }
     }
 
     private Comment getCommentById(Long commentId) {
         return commentRepository.findById(commentId)
-                .orElseThrow(()-> new IllegalArgumentException("comment not found"));
+                .orElseThrow(()-> new CustomException(ErrorCode.COMMENT_NOT_FOUND));
     }
 
     private Post getPostById(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(()-> new IllegalArgumentException("post not found"));
+                .orElseThrow(()-> new CustomException(ErrorCode.POST_NOT_FOUND));
     }
 
     private void createComment(Post post, User user, String content) {
