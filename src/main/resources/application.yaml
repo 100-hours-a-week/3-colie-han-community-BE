@@ -22,10 +22,11 @@ spring:
         format_sql: true
         use_sql_comments:
 
-  data:
-    redis:
-      host: localhost
-      port: 6379
+#  session:
+#    store-type: redis
+#    redis:
+#      host: localhost
+#      port: 6379
 
 jwt:
   secret: L0YkzVg3p4fPzUsj2xJ8pK2E0mSYF5OdpQ0CVbJv9A6q6QYvO2tS8T8fD3yP8oYt

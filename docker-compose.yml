@@ -14,8 +14,8 @@ services:
       - "3306:3306"
 
   redis:
-    image: redis
-    container_name: redis:7.2-alfine
+    image: redis:latest
+    container_name: redis
     restart: always
     volumes:
       - "./redis-data:/data"
