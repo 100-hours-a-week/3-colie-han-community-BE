@@ -14,6 +14,8 @@ public enum ErrorCode {
     /** user **/
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾을수 없습니다."),
     //FORBIDDEN(HttpStatus.FORBIDDEN, "접근 권한이 없습니다."),
+    USER_LOGIN_REQUEST(HttpStatus.FORBIDDEN, "로그인이 필요합니다."),
+    SESSION_INVALID(HttpStatus.FORBIDDEN, "세션을 찾을수없습니다."),
     NOT_RESOURCE_OWNER(HttpStatus.FORBIDDEN, "리소스 소유자가 아니므로 접근할 수 없습니다."),
     EMAIL_ALREADY_EXISTS(HttpStatus.CONFLICT, "이미 존재하는 이메일입니다."),
     NICKNAME_ALREADY_EXISTS(HttpStatus.CONFLICT, "이미 존재하는 닉네임입니다."),

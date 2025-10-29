@@ -45,10 +45,6 @@ public class UserDto {
         }
     }
 
-    public record profileImageUpdateRequest(
-            MultipartFile profileImage
-    ) {}
-
     public record nickNameUpdateRequest(
             @NotBlank(message = "닉네임을 입력해주세요.")
             @Size(max = 10, message = "닉네임은 최대 10자까지 가능합니다.")
@@ -60,5 +56,10 @@ public class UserDto {
             String password,
             @NotBlank(message = "비밀번호를 한번더 입력해주세요")
             String confirmPassword
+    ) {}
+
+    public record loginRequest(
+            String email,
+            String password
     ) {}
 }

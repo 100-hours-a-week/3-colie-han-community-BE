@@ -13,7 +13,7 @@ public class CookieUtil {
                 .path("/")
                 .secure(false)
                 .httpOnly(false)
-                .sameSite("Lax")
+                .sameSite("None")
                 .build();
     }
 
