@@ -18,8 +18,8 @@ public class UserPostLikeController {
     public ResponseEntity<?> addLike(@PathVariable Long postId,
                                      HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
-
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         userPostLikeService.addLike(postId, user);
         return ResponseEntity.ok().build();
     }
@@ -27,7 +27,8 @@ public class UserPostLikeController {
     @DeleteMapping
     public ResponseEntity<?> removeLike(@PathVariable Long postId,
                                         HttpServletRequest servletRequest) {
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         userPostLikeService.removeLike(postId, user);
         return ResponseEntity.ok().build();
     }

@@ -44,7 +44,8 @@ public class PostController {
     public ResponseEntity<Long> uploadPost(@Valid @ModelAttribute PostRequest request,
                                            HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         Long postId = postService.uploadPost(request, user);
         return ResponseEntity.ok(postId);
     }
@@ -54,7 +55,8 @@ public class PostController {
                                         @Valid @ModelAttribute PostRequest request,
                                         HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         Long response = postService.updatePost(postId, request, user);
 
         return ResponseEntity.ok(response);
@@ -64,7 +66,8 @@ public class PostController {
     public ResponseEntity<?> deletePost(@PathVariable Long postId,
                                         HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         postService.deletePost(postId, user);
         return ResponseEntity.ok().build();
     }

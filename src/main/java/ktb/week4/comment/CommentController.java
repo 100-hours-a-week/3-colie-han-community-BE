@@ -20,7 +20,8 @@ public class CommentController {
                               @RequestBody CommentCreateRequest request,
                               HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         commentService.uploadComment(postId, request, user);
     }
 
@@ -29,7 +30,8 @@ public class CommentController {
                               @RequestBody CommentUpdateRequest request,
                               HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         commentService.updateComment(commentId, request, user);
     }
 
@@ -38,7 +40,8 @@ public class CommentController {
                               @PathVariable Long commentId,
                               HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         commentService.deleteComment(postId, commentId, user);
     }
 }
