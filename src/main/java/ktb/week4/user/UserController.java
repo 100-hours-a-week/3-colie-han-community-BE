@@ -2,6 +2,7 @@ package ktb.week4.user;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import ktb.week4.util.exception.CustomException;
@@ -12,7 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Map;
 import java.util.Set;
 
 import static ktb.week4.user.UserDto.*;
@@ -33,7 +36,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<UserResponse> getUser(HttpServletRequest servletRequest) {
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         UserResponse response = userService.getUsers(user);
         return ResponseEntity.ok(response);
     }
@@ -41,7 +45,8 @@ public class UserController {
     @PatchMapping("/profile-image")
     public ResponseEntity<?> updateProfileImage(@RequestParam("file") MultipartFile file,
                                                 HttpServletRequest servletRequest) {
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         userService.updateProfileImage(file, user);
         return ResponseEntity.ok().build();
     }
@@ -49,7 +54,8 @@ public class UserController {
     @PatchMapping("/nickname")
     public ResponseEntity<?> updateNickname(@Valid @RequestBody nickNameUpdateRequest request,
                                             HttpServletRequest servletRequest) {
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         userService.updateNickname(request, user);
         return ResponseEntity.ok().build();
     }
@@ -59,34 +65,65 @@ public class UserController {
     public ResponseEntity<?> updatePassword(@Valid @RequestBody passwordUpdateRequest request,
                                             HttpServletRequest servletRequest) {
 
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         userService.updatePassword(request, user);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity<?> deleteUser(HttpServletRequest servletRequest) {
-        User user = userService.getLoggedInUser(servletRequest);
+        Long userId = (Long) servletRequest.getAttribute("userId");
+        User user = userService.getUser(userId);
         userService.deleteUser(user);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/session/login")
-    public String login(@RequestBody loginRequest loginRequest, HttpServletRequest request) {
 
-        boolean success = userService.loginWithSession(loginRequest.email(), loginRequest.password(), request);
-        if (!success) {
+    @PostMapping("/jwt/login")
+    public String loginWithJwt(@RequestBody loginRequest loginRequest, HttpServletResponse response) {
+        String accessToken = userService.loginWithJwt(loginRequest.email(), loginRequest.password(), response);
+        if (accessToken == null) {
             throw new CustomException(ErrorCode.USER_LOGIN_REQUEST);
         }
-
         return "redirect:/index";
     }
 
-    @PostMapping("/session/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request) {
-        userService.logout(request);
-        return ResponseEntity.ok().build();
+    @PostMapping("/jwt/logout")
+    public String logout(HttpServletResponse servletResponse) {
+        userService.logoutUser(servletResponse);
+        return "redirect:/login";
     }
+
+    @PostMapping("/refresh")
+    @ResponseBody
+    public Map<String, String> refresh(@CookieValue(value = "refreshToken", required = false) String refreshToken,
+                                       HttpServletResponse response) {
+
+        if (refreshToken == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return Map.of("error", "Refresh token missing");
+        }
+
+        try {
+            var tokenRes = userService.refreshTokens(refreshToken, response);
+
+            if (tokenRes == null) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return Map.of("error", "Refresh token invalid or expired");
+            }
+
+            return Map.of(
+                    "accessToken", tokenRes.accessToken(),
+                    "refreshToken", tokenRes.refreshToken()
+            );
+        } catch (ResponseStatusException exception) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return Map.of("error", "Refresh token invalid or expired");
+        }
+    }
+
+
 
 
 

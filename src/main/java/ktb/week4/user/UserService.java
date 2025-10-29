@@ -4,12 +4,16 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import ktb.week4.Login.JwtProvider;
+import ktb.week4.Login.refreshToken.RefreshToken;
+import ktb.week4.Login.refreshToken.RefreshTokenRepository;
 import ktb.week4.image.Image;
 import ktb.week4.image.ImageService;
 import ktb.week4.util.exception.CustomException;
 import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.Instant;
 import java.util.Map;
 
 import static ktb.week4.user.UserDto.*;
@@ -29,6 +34,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ImageService imageService;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final JwtProvider jwtProvider;
+
+    private static final int ACCESS_TOKEN_EXPIRATION = 15 * 60; // 15분
+    private static final int REFRESH_TOKEN_EXPIRATION = 14 * 24 * 3600; // 14일
+
 
     @Transactional
     public Long signUp(SignUpRequest request) {
@@ -113,66 +124,81 @@ public class UserService {
         return user;
     }
 
-    public boolean loginWithSession(String email, String password, HttpServletRequest request) {
-        User user = userRepository.findByEmail(email);
+    public User getUser(Long userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    @Transactional
+    public String loginWithJwt(String email, String password, HttpServletResponse response) {
+        User user = userRepository.findByEmail(email).orElse(null);
+
         if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
-            return false;
+            throw new CustomException(ErrorCode.PASSWORD_MISMATCH);
         }
 
-        HttpSession oldSession = request.getSession(false);
-        if (oldSession != null) {
-            System.out.println("invalidate old session");
-            oldSession.invalidate();
-        }
+        refreshTokenRepository.deleteByUserId(user.getId());
 
-        // 새 세션 생성
-        HttpSession session = request.getSession(true);
-        session.setAttribute("userId", user.getId());
-        session.setAttribute("email", user.getEmail());
-        session.setAttribute("role", user.getRole());
-        session.setMaxInactiveInterval(30 * 60);
-
-        return true;
+        var tokenResponse = generateAndSaveTokens(user);
+        addTokenCookies(response, tokenResponse);
+        return tokenResponse.accessToken();
     }
 
-    public void logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-    }
+    @Transactional
+    public TokenResponse refreshTokens(String refreshToken, HttpServletResponse response) {
+        var parsedRefreshToken = jwtProvider.parse(refreshToken);
 
-    public User getLoggedInUser(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+        RefreshToken entity = refreshTokenRepository.findByTokenAndRevokedFalse(refreshToken).orElse(null);
 
-        if (session == null) {
-            throw new CustomException(ErrorCode.SESSION_INVALID);
-
+        if (entity == null || entity.getExpiresDate().isBefore(Instant.now())) {
+            return null;
         }
 
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
-            throw new CustomException(ErrorCode.SESSION_INVALID);
-        }
-
+        Long userId = Long.valueOf(parsedRefreshToken.getBody().getSubject());
         User user = userRepository.findById(userId).orElse(null);
+
         if (user == null) {
-            throw new CustomException(ErrorCode.USER_NOT_FOUND);
+            return null;
         }
 
-        return user;
+        String newAccessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail());
+
+        addTokenCookie(response, "accessToken", newAccessToken, ACCESS_TOKEN_EXPIRATION);
+
+        return new TokenResponse(newAccessToken, refreshToken);
     }
 
-    // 0. 로그인 요청
-    // 1. redis에 세션생성 key : value(생성시각, 마지막접근시각, 유저아이디)
-    // 2. 쿠키에 세션key를 담아서 전달
-    // 3. 세션아이디 쿠키전달
+    public void logoutUser(HttpServletResponse response) {
+        addTokenCookie(response, "accessToken", null, 0);
+        addTokenCookie(response, "refreshToken", null, 0);
+    }
 
-    // 4. 유저요청시 redis 조회 후 유저 검증
-    // 4-1. 클라이언트가 가진 sessionId와 redis가 가진 sessionId 비교 검증 (세션id를 탈취하면? 위장가능한거아님?)
-    // 4-2. 클라이언트가 가진 sessionId가 맞으면 요청처리해줌 / 틀리면 예외처리
-    // 5. 로그아웃시 세션제거
+    private TokenResponse generateAndSaveTokens(User user) {
+        String accessToken = jwtProvider.createAccessToken(user.getId(), user.getEmail());
+        String refreshToken = jwtProvider.createRefreshToken(user.getId());
 
-    // 6. 세션만료시 세션삭제
-    // 7. 사용자움직임에 따라 세션 갱신?
+        RefreshToken refreshEntity = new RefreshToken();
+        refreshEntity.setUserId(user.getId());
+        refreshEntity.setToken(refreshToken);
+        refreshEntity.setExpiresDate(Instant.now().plusSeconds(REFRESH_TOKEN_EXPIRATION));
+        refreshEntity.setRevoked(false);
+        refreshTokenRepository.save(refreshEntity);
+
+        return new TokenResponse(accessToken, refreshToken);
+    }
+
+    private void addTokenCookies(HttpServletResponse response, TokenResponse tokenResponse) {
+        addTokenCookie(response, "accessToken", tokenResponse.accessToken(), ACCESS_TOKEN_EXPIRATION);
+        addTokenCookie(response, "refreshToken", tokenResponse.refreshToken(), REFRESH_TOKEN_EXPIRATION);
+    }
+
+    private void addTokenCookie(HttpServletResponse response, String name, String value, int maxAge) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setHttpOnly(false);
+        cookie.setPath("/");
+        cookie.setMaxAge(maxAge);
+        response.addCookie(cookie);
+    }
+
+    public record TokenResponse(String accessToken, String refreshToken) { }
+
 }
