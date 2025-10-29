@@ -1,8 +1,9 @@
 package ktb.week4.post;
 
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import ktb.week4.user.CurrentUser;
 import ktb.week4.post.postImage.PostImageService;
 import ktb.week4.post.postView.PostViewService;
 import ktb.week4.user.User;
@@ -24,6 +25,7 @@ public class PostController {
 
     private final PostService postService;
     private final PostImageService postImageService;
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<Page<PostOverviewResponse>> getAllPosts(@PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -40,8 +42,9 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<Long> uploadPost(@Valid @ModelAttribute PostRequest request,
-                                           @CurrentUser User user) {
+                                           HttpServletRequest servletRequest) {
 
+        User user = userService.getLoggedInUser(servletRequest);
         Long postId = postService.uploadPost(request, user);
         return ResponseEntity.ok(postId);
     }
@@ -49,8 +52,9 @@ public class PostController {
     @PatchMapping("/{postId}")
     public ResponseEntity<?> updatePost(@PathVariable Long postId,
                                         @Valid @ModelAttribute PostRequest request,
-                                        @CurrentUser User user) {
+                                        HttpServletRequest servletRequest) {
 
+        User user = userService.getLoggedInUser(servletRequest);
         Long response = postService.updatePost(postId, request, user);
 
         return ResponseEntity.ok(response);
@@ -58,8 +62,9 @@ public class PostController {
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> deletePost(@PathVariable Long postId,
-                                        @CurrentUser User user) {
+                                        HttpServletRequest servletRequest) {
 
+        User user = userService.getLoggedInUser(servletRequest);
         postService.deletePost(postId, user);
         return ResponseEntity.ok().build();
     }

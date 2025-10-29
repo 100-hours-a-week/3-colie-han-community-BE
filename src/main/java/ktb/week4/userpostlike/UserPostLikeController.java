@@ -1,6 +1,6 @@
 package ktb.week4.userpostlike;
 
-import ktb.week4.user.CurrentUser;
+import jakarta.servlet.http.HttpServletRequest;
 import ktb.week4.user.User;
 import ktb.week4.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserPostLikeController {
     private final UserPostLikeService userPostLikeService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<?> addLike(@PathVariable Long postId,
-                                                @CurrentUser User user) {
+                                     HttpServletRequest servletRequest) {
+
+        User user = userService.getLoggedInUser(servletRequest);
 
         userPostLikeService.addLike(postId, user);
         return ResponseEntity.ok().build();
@@ -23,7 +26,8 @@ public class UserPostLikeController {
 
     @DeleteMapping
     public ResponseEntity<?> removeLike(@PathVariable Long postId,
-                                                @CurrentUser User user) {
+                                        HttpServletRequest servletRequest) {
+        User user = userService.getLoggedInUser(servletRequest);
         userPostLikeService.removeLike(postId, user);
         return ResponseEntity.ok().build();
     }
