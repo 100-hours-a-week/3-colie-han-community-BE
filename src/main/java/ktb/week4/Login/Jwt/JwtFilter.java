@@ -29,7 +29,20 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String path = request.getRequestURI();
+        if (path.startsWith("/login") || path.startsWith("/signup")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String accessToken = this.cookieUtil.findCookie("accessToken", request.getCookies());
+
+        if (accessToken == null) {
+            String header = request.getHeader("Authorization");
+            if (header != null && header.startsWith("Bearer ")) {
+                accessToken = header.substring(7);
+            }
+        }
 
         if (accessToken == null) {
             System.out.println("token null");
@@ -45,7 +58,6 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String email = jwtUtil.getEmail(accessToken);
-
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");

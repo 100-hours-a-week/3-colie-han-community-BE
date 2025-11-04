@@ -54,7 +54,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        System.out.println("✅ successfulAuthentication 실행됨");
         CustomUserDetails customUserDetails = (CustomUserDetails) authResult.getPrincipal();
         Collection<? extends GrantedAuthority> authorities = customUserDetails.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -73,8 +72,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 .build();
         refreshTokenRepository.save(refreshEntity);
 
-        ResponseCookie accessCookie = cookieUtil.addCookie("accessToken", accessToken, 50);
-        ResponseCookie refreshCookie = cookieUtil.addCookie("refreshToken", refreshToken, 50);
+        ResponseCookie accessCookie = cookieUtil.addCookie("accessToken", accessToken, -1);
+        ResponseCookie refreshCookie = cookieUtil.addCookie("refreshToken", refreshToken, -1);
 
         response.addHeader(HttpHeaders.SET_COOKIE, accessCookie.toString());
         response.addHeader(HttpHeaders.SET_COOKIE, refreshCookie.toString());
