@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.function.LongPredicate;
+
 @Service
 @RequiredArgsConstructor
 public class UserPostLikeService {
@@ -19,6 +22,14 @@ public class UserPostLikeService {
     private final PostViewService postViewService;
     private final PostRepository postRepository;
 
+    @Transactional(readOnly = true)
+    public Boolean getUserPostLike(Long postId, User user) {
+        UserPostLikeId userPostLikeId = new UserPostLikeId(user.getId(), postId);
+        UserPostLike userPostLike = userPostLikeRepository.findById(userPostLikeId)
+                .orElse(null);
+
+        return userPostLike != null;
+    }
     @Transactional
     public void addLike(Long postId, User user) {
         Post post = getPostById(postId);
@@ -42,7 +53,7 @@ public class UserPostLikeService {
 
     private void validateOwner(User user, User postUser) {
         if (user.getId().equals(postUser.getId())) {
-            throw new CustomException(ErrorCode.NOT_RESOURCE_OWNER);
+            throw new CustomException(ErrorCode.SELF_LIKE_NOT_ALLOWED);
         }
     }
 

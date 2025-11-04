@@ -10,6 +10,7 @@ public enum ErrorCode {
 
     /** server **/
     SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "알수없는 서버 에버가 발생했습니다."),
+    TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND, "토큰이 존재하지 않습니다."),
 
     /** user **/
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "유저를 찾을수 없습니다."),
@@ -44,8 +45,8 @@ public enum ErrorCode {
     FILE_UPLOAD_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다."),
 
     /** userPostLike **/
-    USER_POST_LIKE_NOT_FOUND(HttpStatus.NOT_FOUND, "유저의 좋아요를 찾을 수 없습니다.");
-
+    USER_POST_LIKE_NOT_FOUND(HttpStatus.NOT_FOUND, "유저의 좋아요를 찾을 수 없습니다."),
+    SELF_LIKE_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "본인게시글에 좋아요를 누를수없습니다.");
 
 
     private final HttpStatus status;

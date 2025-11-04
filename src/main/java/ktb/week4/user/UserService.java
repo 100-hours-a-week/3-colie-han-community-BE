@@ -1,15 +1,27 @@
 package ktb.week4.user;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import ktb.week4.Login.Cookie.CookieUtil;
+import ktb.week4.Login.Jwt.JwtUtil;
+import ktb.week4.Login.RefreshToken.RefreshToken;
+import ktb.week4.Login.RefreshToken.RefreshTokenRepository;
+import ktb.week4.Login.RefreshToken.TokenResponse;
 import ktb.week4.image.Image;
 import ktb.week4.image.ImageService;
 import ktb.week4.util.exception.CustomException;
 import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.Instant;
 
 import static ktb.week4.user.UserDto.*;
 
@@ -21,6 +33,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ImageService imageService;
+    private final JwtUtil jwtUtil;
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    private static final int ACCESS_TOKEN_EXPIRATION = 15 * 60; // 15분
+    private static final int REFRESH_TOKEN_EXPIRATION = 14 * 24 * 3600; // 14일
+    private final CookieUtil cookieUtil;
+
 
     @Transactional
     public Long signUp(SignUpRequest request) {
@@ -103,6 +122,33 @@ public class UserService {
                 .build();
         userRepository.save(user);
         return user;
+    }
+
+    public TokenResponse refreshToken(String refreshToken, HttpServletResponse response) {
+        var parsedRefreshToken = jwtUtil.parse(refreshToken);
+
+        RefreshToken entity = refreshTokenRepository.findByTokenAndRevokedFalse(refreshToken)
+                .orElse(null);
+
+        if (entity == null || entity.getExpiresAt().isBefore(Instant.now())) {
+            return null;
+        }
+
+        Long userId = Long.valueOf(parsedRefreshToken.getBody().getSubject());
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user == null) {
+            return null;
+        }
+
+        // refresh token은 유지하고 access token만 새로 발급
+        String newAccessToken = jwtUtil.createAccessToken(user.getId(), user.getEmail(), user.getRole());
+
+        // access token 쿠키만 갱신
+        ResponseCookie accessCookie = cookieUtil.addCookie("accessToken", newAccessToken, ACCESS_TOKEN_EXPIRATION);
+        response.addHeader(HttpHeaders.SET_COOKIE, accessCookie.toString());
+
+        return new TokenResponse(newAccessToken, refreshToken);
     }
 
 

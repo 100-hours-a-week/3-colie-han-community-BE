@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserPostLikeController {
     private final UserPostLikeService userPostLikeService;
 
+    @GetMapping
+    public ResponseEntity<Boolean> getUserPostLike(@PathVariable Long postId,
+                                                   @CurrentUser User user) {
+        Boolean isPostLike = userPostLikeService.getUserPostLike(postId, user);
+        return ResponseEntity.ok(isPostLike);
+    }
+
     @PostMapping
     public ResponseEntity<?> addLike(@PathVariable Long postId,
                                                 @CurrentUser User user) {

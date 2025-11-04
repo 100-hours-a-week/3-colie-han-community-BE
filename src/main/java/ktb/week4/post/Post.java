@@ -28,7 +28,7 @@ public class Post extends BaseEntity {
     @Column(length = 26)
     private String postTitle;
 
-    @Column(length = 20000, columnDefinition = "TEXT")
+    @Column(length = 5000, columnDefinition = "TEXT")
     private String postContent;
 
     @OneToOne(mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)

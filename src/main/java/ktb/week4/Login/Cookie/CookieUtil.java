@@ -1,7 +1,6 @@
-package ktb.week4.Login;
+package ktb.week4.Login.Cookie;
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,7 @@ public class CookieUtil {
                 .path("/")
                 .secure(false)
                 .httpOnly(false)
-                .sameSite("Lax")
+                .sameSite("None")
                 .build();
     }
 
