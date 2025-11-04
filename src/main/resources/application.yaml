@@ -37,5 +37,5 @@ logging:
       springframework:
         web: DEBUG
   file:
-    name: /home/logs/spring.log
+    name: /home/week8/spring.log
 
