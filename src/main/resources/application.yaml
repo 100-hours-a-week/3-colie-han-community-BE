@@ -30,3 +30,12 @@ spring:
 jwt:
   secret: ${JWT_SECRET}
 
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        web: DEBUG
+  file:
+    name: /home/logs/spring.log
+
