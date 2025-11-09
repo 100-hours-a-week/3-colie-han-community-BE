@@ -1,9 +1,11 @@
 package ktb.week4.image;
 
+import jakarta.annotation.PostConstruct;
 import ktb.week4.util.exception.CustomException;
 import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +22,22 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ImageService {
     private final ImageRepository imageRepository;
-    private final Path rootLocation = Paths.get("uploads").toAbsolutePath().normalize();
+
+    @Value("${upload.path}")
+    private String uploadPath;
+
+    private Path rootLocation;
+
+    @PostConstruct
+    public void init() {
+        this.rootLocation = Paths.get(uploadPath).toAbsolutePath().normalize();
+
+        try {
+            Files.createDirectories(rootLocation);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create upload directory", e);
+        }
+    }
 
     // 허용하는 파일 타입
     private static final Set<String> ALLOWED_CONTENT_TYPES = Set.of(
