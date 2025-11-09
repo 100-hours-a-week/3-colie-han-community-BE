@@ -30,6 +30,10 @@ cors:
   allowed-origins:
     ${SERVER_URL}
 
+upload:
+  path: /home/week8/uploads
+
+
 jwt:
   secret: ${JWT_SECRET}
 
