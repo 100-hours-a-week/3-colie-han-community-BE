@@ -28,9 +28,9 @@ spring:
       port: 6379
 
 
-    cors:
-      allowed-origins:
-        - ${SERVER_URL}
+cors:
+  allowed-origins:
+    - ${SERVER_URL}
 
 jwt:
   secret: ${JWT_SECRET}
