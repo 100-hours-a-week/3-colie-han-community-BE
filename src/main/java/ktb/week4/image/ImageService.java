@@ -23,6 +23,7 @@ import java.util.*;
 public class ImageService {
     private final ImageRepository imageRepository;
 
+    // TODO image는 lambda apigateway로 변경
     @Value("${upload.path}")
     private String uploadPath;
 
