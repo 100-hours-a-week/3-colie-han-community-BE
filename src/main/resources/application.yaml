@@ -47,3 +47,8 @@ logging:
   file:
     name: /home/week8/spring.log
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health"
