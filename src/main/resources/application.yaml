@@ -31,7 +31,7 @@ cors:
     ${SERVER_URL}
 
 upload:
-  path: /home/week8/uploads
+  path: /app/uploads
 
 
 jwt:
