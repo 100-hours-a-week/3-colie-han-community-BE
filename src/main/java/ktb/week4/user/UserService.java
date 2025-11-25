@@ -112,7 +112,7 @@ public class UserService {
         }
     }
 
-    private User createUser(SignUpRequest request, Image image) {
+    public User createUser(SignUpRequest request, Image image) {
         User user = User.builder()
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
