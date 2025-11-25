@@ -19,3 +19,5 @@ jwt:
 cors:
   allowed-origins: ${SERVER_URL:http://localhost:3000}
 
+upload:
+  path: /tmp/test-uploads
