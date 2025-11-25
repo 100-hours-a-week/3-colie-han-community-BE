@@ -24,11 +24,11 @@ spring:
       port: 6379
 cors:
   allowed-origins:
-
+    "http://localhost:3000"
 
 upload:
-  path:
+  path: /Users/han-eunseo/Desktop/KTB/3-colie-han-community-BE/uploads
 
 
 jwt:
-  secret:
+  secret: dfjidjfdijfsdijfdifjsjfsdlfjsifjslfjuuhuhuhu
