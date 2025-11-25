@@ -73,4 +73,9 @@ clean {
 
 tasks.named('test') {
 	useJUnitPlatform()
+    systemProperty 'spring.profiles.active',
+    System.getenv('SPRING_PROFILES_ACTIVE')?:'test'
+    if (System.getenv('JWT_SECRET')) {
+        systemProperty'JWT_SECRET',System.getenv('JWT_SECRET')
+    }
 }
