@@ -27,8 +27,8 @@ cors:
     "http://localhost:3000"
 
 upload:
-  path: /Users/han-eunseo/Desktop/KTB/3-colie-han-community-BE/uploads
+  path:
 
 
 jwt:
-  secret: dfjidjfdijfsdijfdifjsjfsdlfjsifjslfjuuhuhuhu
+  secret:
