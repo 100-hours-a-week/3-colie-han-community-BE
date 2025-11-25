@@ -42,4 +42,4 @@ jobs:
           env:
             JWT_SECRET: test-jwt-secret-key-for-testing-12345678901234567890
             SPRING_PROFILES_ACTIVE: test
-          run: ./gradlew test -Dspring.profiles.active=test
+          run: ./gradlew test --stacktrace --info
