@@ -1,5 +1,6 @@
 package ktb.week4.user;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import ktb.week4.util.exception.CustomException;
 import ktb.week4.util.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
+import java.util.Arrays;
 
 import static ktb.week4.user.UserDto.*;
 
@@ -39,6 +42,7 @@ public class UserService {
     private static final int ACCESS_TOKEN_EXPIRATION = 15 * 60; // 15분
     private static final int REFRESH_TOKEN_EXPIRATION = 14 * 24 * 3600; // 14일
     private final CookieUtil cookieUtil;
+    private final Environment environment;
 
 
     @Transactional
@@ -99,6 +103,12 @@ public class UserService {
             throw new CustomException(ErrorCode.EMAIL_ALREADY_EXISTS);
         }
     }
+
+    @PostConstruct
+    public void checkProfile() {
+        System.out.println("### ACTIVE PROFILE = " + Arrays.toString(environment.getActiveProfiles()));
+    }
+
 
     private void validateNickname(String nickname) {
         if (userRepository.existsByNickName(nickname)) {
