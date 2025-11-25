@@ -104,12 +104,6 @@ public class UserService {
         }
     }
 
-    @PostConstruct
-    public void checkProfile() {
-        System.out.println("### ACTIVE PROFILE = " + Arrays.toString(environment.getActiveProfiles()));
-    }
-
-
     private void validateNickname(String nickname) {
         if (userRepository.existsByNickName(nickname)) {
             throw new CustomException(ErrorCode.NICKNAME_ALREADY_EXISTS);
