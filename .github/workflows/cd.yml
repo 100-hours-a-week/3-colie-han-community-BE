@@ -1,0 +1,98 @@
+name: Beckend java CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # 테스트
+  test:
+    runs-on: ubuntu-latest
+
+    # 순서
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Cache Gradle packages # gradle 캐시 설정
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*/gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Install dependencies
+        run: ./gradlew clean build -x test
+
+      - name: Run Test
+        run: ./gradlew test
+
+  # 빌드, 이미지 푸시
+  build-and-push-image:
+    needs: test
+    runs-on: [be]
+    if: github.ref == 'refs/heads/main' # main으로 push될때만 실행
+
+    # 순서
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Login to Private Registry
+        run: |
+          echo "${{secrets.REGISTRY_PASSWORD}}" | docker login ${{secrets.REGISTRY_URL}} -u ${{secrets.REGISTRY_USERNAME}} --passowrd-stdin
+
+      - name: Build Docker Image
+        run: |
+            docker build -t ktb-spring:latest .
+
+      - name: Tag Image
+        run: |
+          docker tag ktb-spring:latest ${{secrets.REGISTRY_URL}}/ktb-spring:latest
+
+      - name: Push Image
+        run: |
+          docker push ${{secrets.REGISTRY_URL}}/ktb-spring:latest
+
+  # 배포
+  deploy:
+    needs: build-and-push-image
+    runs-on: [be]
+
+    # 순서
+    steps:
+      - name: Checkout Repository for SCP
+        uses: actions/checkout@v6
+
+      - name: Set up SSH Key on Runner
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
+
+      - name: Directory Permissions
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{secrets.SSH_HOST_CONNECT}} "
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/be/
+          "
+
+      - name: Send docker-compose.yml to Private EC2
+        run: |
+          scp -o StrictHostKeyChecking=no ./deploy/docker-compose.yml ${{secrets.SSH_HOST_CONNECT}}:/home/ubuntu/be/docker-compose.yml
+
+      - name: Deploy to Private EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{secrets.SSH_HOST_CONNECT}} "
+            echo \"${{secrets.REGISTRY_PASSWORD}}\" | docker login ${{secrets.REGISTRY_PRIVATE_URL}} -u ${{secrets.REGISTRY_USERNAME}} --password-stdin
+          
+            cd /home/ubuntu/be &&
+          
+            docker compose pull
+          
+            docker compose up -d
+          "

@@ -12,9 +12,6 @@ jobs:
     build:
       runs-on: ubuntu-latest
 
-#      strategy:
-#        matrix:
-
       steps:
         - name: Checkout repository # 저장소 코드 가져오기
           uses: actions/checkout@v6
