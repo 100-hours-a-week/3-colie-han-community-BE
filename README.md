@@ -91,13 +91,13 @@ https://github.com/100-hours-a-week/3-colie-han-community-FE
 
 ## 🚀 데이터베이스
 
-(이미지)
+<img width="913" height="552" alt="Image" src="https://github.com/user-attachments/assets/af156299-8d34-4947-a90f-3c7e7072b9d5" />
 
-<br>
+<br><br>
 
 ## 🪐 아키텍처
 
-(이미지)
+<img width="547" height="484" alt="Image" src="https://github.com/user-attachments/assets/877e2387-156f-46ec-9fcd-5d028ca03d6e" />
 
 
 - Nginx (Public Subnet)
