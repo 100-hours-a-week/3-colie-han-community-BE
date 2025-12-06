@@ -71,15 +71,16 @@ public class UserController {
     public Map<String, String> refresh(@CookieValue(value = "refreshToken", required = false) String refreshToken,
                                      HttpServletResponse response) {
         if (refreshToken == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return Map.of("error", "Refresh token missing");
+            userService.deleteCookies(response);
+            response.setStatus(401);
+            return Map.of("error", "Refresh Token Missing");
         }
 
         try {
             var toeknResponse = userService.refreshToken(refreshToken, response);
 
             if (toeknResponse == null) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setStatus(401);
                 return Map.of("error", "Refresh token invalid or expired");
             }
 
@@ -88,7 +89,7 @@ public class UserController {
                     "refreshToken", toeknResponse.refreshToken()
             );
         } catch (ResponseStatusException exception) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setStatus(401);
             return Map.of("error", "Refresh token invalid or expired");
         }
     }
