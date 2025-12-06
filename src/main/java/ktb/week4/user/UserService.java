@@ -48,6 +48,7 @@ public class UserService {
     @Transactional
     public Long signUp(SignUpRequest request) {
         validateEmail(request.email());
+        validateNickname(request.nickName());
         validatePassword(request.password(), request.confirmPassword());
 
         Image image = imageService.uploadImage(request.profileImage());
