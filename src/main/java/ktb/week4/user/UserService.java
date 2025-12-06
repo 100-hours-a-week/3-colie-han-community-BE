@@ -136,6 +136,7 @@ public class UserService {
                 .orElse(null);
 
         if (entity == null || entity.getExpiresAt().isBefore(Instant.now())) {
+            deleteCookies(response);
             return null;
         }
 
@@ -154,6 +155,13 @@ public class UserService {
         response.addHeader(HttpHeaders.SET_COOKIE, accessCookie.toString());
 
         return new TokenResponse(newAccessToken, refreshToken);
+    }
+
+    public void deleteCookies(HttpServletResponse response) {
+        ResponseCookie clearAccess = cookieUtil.deleteCookie("accessToken");
+        ResponseCookie clearRefresh = cookieUtil.deleteCookie("refreshToken");
+        response.addHeader(HttpHeaders.SET_COOKIE, clearAccess.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE, clearRefresh.toString());
     }
 
 
