@@ -30,7 +30,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.startsWith("/login") || path.startsWith("/signup")) {
+        if (path.startsWith("/login") || path.startsWith("/signup") || path.startsWith("/api/users/refresh")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -53,7 +53,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (jwtUtil.isExpired(accessToken)) {
             System.out.println("token expired");
-            filterChain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
             return;
         }
 
