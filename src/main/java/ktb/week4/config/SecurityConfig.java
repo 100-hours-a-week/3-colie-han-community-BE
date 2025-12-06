@@ -137,6 +137,15 @@ public class SecurityConfig {
                                     response.setStatus(HttpServletResponse.SC_OK);
                                 })
 
+                )
+
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint((httpServletRequest, httpServletResponse, exception) -> {
+                            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        })
+                        .accessDeniedHandler((httpServletRequest, httpServletResponse, exception) -> {
+                            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        })
                 );
 
 
