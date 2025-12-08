@@ -60,9 +60,9 @@ dependencies {
     // markdown
     implementation 'org.commonmark:commonmark:0.22.0'
 
-    // actuator
+    // monitoring
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
+    implementation 'io.micrometer:micrometer-registry-prometheus'
 
 
 }
