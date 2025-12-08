@@ -88,7 +88,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/signup", "/users/**", "/files/**", "/legal/**").permitAll()
-                        .requestMatchers("/actuator/health").permitAll()
+                        .requestMatchers("/actuator/health", "/actuator/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
 
@@ -147,6 +147,7 @@ public class SecurityConfig {
                             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
                         })
                 );
+
 
 
         return http.build();
